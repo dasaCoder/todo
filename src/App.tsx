@@ -13,13 +13,8 @@ function App() {
     <Grid container className="App">
       <AddItemField />
 
-      <Grid
-        container
-        className="todo-container"
-        justifyContent="center"
-        spacing={3}
-      >
-        <List>
+      <Grid container className="todo-container" justifyContent="center">
+        <List style={{ width: "inherit" }}>
           {todoList.map((todoItem) => (
             <TodoListItem todoItem={todoItem} />
           ))}

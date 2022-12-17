@@ -21,13 +21,9 @@ const AddItemField = () => {
   };
 
   return (
-    <Grid
-      container
-      className="todo-container"
-      justifyContent="center"
-      spacing={3}
-    >
+    <Grid container className="todo-container" justifyContent="center">
       <TextField
+        fullWidth
         required
         error={taskErr}
         variant="outlined"
