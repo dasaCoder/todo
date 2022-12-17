@@ -6,7 +6,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import { TodoItem } from "./classes/TodoItem";
+import { TodoItem } from "./types";
 
 const TodoItemComponent = (props: { todoItem: TodoItem }) => {
   const todoItem = props.todoItem;

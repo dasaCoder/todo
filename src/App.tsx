@@ -1,16 +1,13 @@
 import "./App.css";
 import { Grid, List } from "@mui/material";
 import AddItemField from "./AddItemField";
-import { TodoItem } from "./classes/TodoItem";
+import { TodoItem } from "./types";
 import TodoItemComponent from "./TodoItem";
 import React from "react";
+import { useAppSelector } from "./hooks/reduxHelpers";
 
 function App() {
-  const todoList: TodoItem[] = [
-    { id: "1", task: "Research cover letter", isDone: false },
-    { id: "2", task: "Todo app", isDone: false },
-    { id: "3", task: "Hang all the curtains", isDone: false },
-  ];
+  const todoList: TodoItem[] = useAppSelector((state) => state.todo.list);
 
   return (
     <Grid container className="App">
