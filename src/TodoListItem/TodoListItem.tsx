@@ -6,9 +6,9 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
-import { TodoItem } from "./types";
+import { TodoItem } from "../types";
 
-const TodoItemComponent = (props: { todoItem: TodoItem }) => {
+const TodoListItem = (props: { todoItem: TodoItem }) => {
   const todoItem = props.todoItem;
 
   const handleMarkAsDone = (id: string) => {
@@ -37,4 +37,4 @@ const TodoItemComponent = (props: { todoItem: TodoItem }) => {
   );
 };
 
-export default TodoItemComponent;
+export default TodoListItem;

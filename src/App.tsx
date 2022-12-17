@@ -1,8 +1,8 @@
 import "./App.css";
 import { Grid, List } from "@mui/material";
-import AddItemField from "./AddItemField";
+import AddItemField from "./AddItemField/AddItemField";
 import { TodoItem } from "./types";
-import TodoItemComponent from "./TodoItem";
+import TodoListItem from "./TodoListItem/TodoListItem";
 import React from "react";
 import { useAppSelector } from "./hooks/reduxHelpers";
 
@@ -21,7 +21,7 @@ function App() {
       >
         <List>
           {todoList.map((todoItem) => (
-            <TodoItemComponent todoItem={todoItem} />
+            <TodoListItem todoItem={todoItem} />
           ))}
         </List>
       </Grid>
