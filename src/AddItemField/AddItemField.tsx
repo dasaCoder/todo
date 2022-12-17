@@ -18,6 +18,7 @@ const AddItemField = () => {
     dispatch(
       addItem({ id: `${Math.random()}`, task, isDone: false, date: new Date() })
     );
+    setTask("");
   };
 
   return (

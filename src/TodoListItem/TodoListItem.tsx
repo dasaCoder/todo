@@ -54,10 +54,7 @@ const TodoListItem = (props: { todoItem: TodoItem }) => {
         onClick={() => handleMarkAsDone(todoItem.id)}
         dense
       >
-        <ListItemText
-          id={todoItem.id}
-          primary={todoItem.task + todoItem.isDone}
-        />
+        <ListItemText id={todoItem.id} primary={todoItem.task} />
       </ListItemButton>
     </ListItem>
   );
