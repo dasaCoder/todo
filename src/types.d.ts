@@ -1,6 +1,6 @@
 export class TodoItem {
   id!: string;
   task!: string;
-  date?: Date;
+  date?: string;
   isDone: boolean = false;
 }

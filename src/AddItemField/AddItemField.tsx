@@ -3,7 +3,7 @@ import { Grid, IconButton, TextField } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useState } from "react";
 import { useAppDispatch } from "../hooks/reduxHelpers";
-import { addItem } from "../redux-store/slices/todoSlice";
+import { addTodo } from "../redux-store/slices/todoSlice";
 
 const AddItemField = () => {
   const [task, setTask] = useState("");
@@ -16,7 +16,12 @@ const AddItemField = () => {
       return;
     }
     dispatch(
-      addItem({ id: `${Math.random()}`, task, isDone: false, date: new Date() })
+      addTodo({
+        id: `${Math.random()}`,
+        task,
+        isDone: false,
+        date: new Date().toISOString(),
+      })
     );
     setTask("");
   };
@@ -46,6 +51,11 @@ const AddItemField = () => {
             setTaskErr(false);
           }
           setTask(val);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleAddItem();
+          }
         }}
       />
     </Grid>

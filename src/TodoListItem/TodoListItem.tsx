@@ -10,18 +10,21 @@ import {
 import React from "react";
 import { useAppDispatch } from "../hooks/reduxHelpers";
 import { TodoItem } from "../types";
-import { markAsDone, removeItem } from "../redux-store/slices/todoSlice";
+import {
+  deleteTodoItem,
+  updateTodoItem,
+} from "../redux-store/slices/todoSlice";
 
 const TodoListItem = (props: { todoItem: TodoItem }) => {
   const todoItem = props.todoItem;
   const dispatch = useAppDispatch();
 
-  const handleMarkAsDone = (id: string) => {
-    dispatch(markAsDone({ id }));
+  const handleMarkAsDone = () => {
+    dispatch(updateTodoItem({ ...todoItem, isDone: true }));
   };
 
   const handleDeleteItem = (id: string) => {
-    dispatch(removeItem({ id }));
+    dispatch(deleteTodoItem(id));
   };
 
   return (
@@ -33,7 +36,7 @@ const TodoListItem = (props: { todoItem: TodoItem }) => {
             <IconButton
               edge="end"
               aria-label="comments"
-              onClick={() => handleMarkAsDone(todoItem.id)}
+              onClick={() => handleMarkAsDone()}
             >
               <Done fontSize="small" />
             </IconButton>
@@ -49,11 +52,7 @@ const TodoListItem = (props: { todoItem: TodoItem }) => {
         </>
       }
     >
-      <ListItemButton
-        role={undefined}
-        onClick={() => handleMarkAsDone(todoItem.id)}
-        dense
-      >
+      <ListItemButton role={undefined} onClick={() => handleMarkAsDone()} dense>
         <ListItemText id={todoItem.id} primary={todoItem.task} />
       </ListItemButton>
     </ListItem>

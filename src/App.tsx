@@ -3,11 +3,18 @@ import { Grid, List } from "@mui/material";
 import AddItemField from "./AddItemField/AddItemField";
 import { TodoItem } from "./types";
 import TodoListItem from "./TodoListItem/TodoListItem";
-import React from "react";
-import { useAppSelector } from "./hooks/reduxHelpers";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHelpers";
+import { fetchTodos } from "./redux-store/slices/todoSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
+
   const todoList: TodoItem[] = useAppSelector((state) => state.todo.list);
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, []);
 
   return (
     <Grid container className="App">
@@ -16,7 +23,7 @@ function App() {
       <Grid container className="todo-container" justifyContent="center">
         <List style={{ width: "inherit" }}>
           {todoList.map((todoItem) => (
-            <TodoListItem todoItem={todoItem} />
+            <TodoListItem key={todoItem.id} todoItem={todoItem} />
           ))}
         </List>
       </Grid>
