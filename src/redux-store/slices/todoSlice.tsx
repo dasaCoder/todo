@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { TODO_ITEMS } from "../../constants";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { TodoItem } from "../../types";
 import { TodoState } from "../types";
 import firebaseApp from "../../firebase";
@@ -13,32 +12,29 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  where,
 } from "firebase/firestore";
-import { WritableDraft } from "immer/dist/internal";
-import { create } from "domain";
 
 const DB = getFirestore(firebaseApp);
 const COLLECTION = collection(DB, "todos");
-
-const getAllTodos = (): TodoItem[] => {
-  const todos = localStorage.getItem(TODO_ITEMS);
-  const items: TodoItem[] = todos ? JSON.parse(todos) : [];
-  return items;
-};
 
 const initialState: TodoState = {
   list: [],
 };
 
-export const fetchTodos = createAsyncThunk("todos/fetch", async () => {
-  const querySnapshots = await getDocs(
-    query(COLLECTION, orderBy("date", "desc"))
-  );
-  const newData: TodoItem[] = querySnapshots.docs.map(
-    (doc) => ({ ...doc.data(), id: doc.id } as TodoItem)
-  );
-  return newData;
-});
+export const fetchTodos = createAsyncThunk(
+  "todos/fetch",
+  async (userId: string) => {
+    console.log("todos/fetch::invoked");
+    const querySnapshots = await getDocs(
+      query(COLLECTION, where(userId, "==", userId), orderBy("date", "desc"))
+    );
+    const newData: TodoItem[] = querySnapshots.docs.map(
+      (doc) => ({ ...doc.data(), id: doc.id } as TodoItem)
+    );
+    return newData;
+  }
+);
 
 export const addTodo = createAsyncThunk(
   "todos/add",
@@ -70,13 +66,7 @@ export const deleteTodoItem = createAsyncThunk(
 export const todoSlice = createSlice({
   name: "todo",
   initialState,
-  reducers: {
-    removeItem: (state, action: PayloadAction<{ id: string }>) => {
-      console.log("removeItem dispatched");
-      state.list = state.list.filter((item) => item.id !== action.payload.id);
-      localStorage.setItem(TODO_ITEMS, JSON.stringify(state.list));
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTodos.fulfilled, (state, action) => {
       state.list = action.payload;

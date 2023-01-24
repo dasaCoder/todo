@@ -2,13 +2,17 @@ import React from "react";
 import { Grid, IconButton, TextField } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useState } from "react";
-import { useAppDispatch } from "../hooks/reduxHelpers";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHelpers";
 import { addTodo } from "../redux-store/slices/todoSlice";
+import { User } from "../types";
 
 const AddItemField = () => {
   const [task, setTask] = useState("");
   const [taskErr, setTaskErr] = useState(false);
   const dispatch = useAppDispatch();
+  const user: User | undefined = useAppSelector(
+    (state) => state.auth.user as User
+  );
 
   const handleAddItem = () => {
     if (task === "") {
@@ -21,6 +25,7 @@ const AddItemField = () => {
         task,
         isDone: false,
         date: new Date().toISOString(),
+        userId: user?.uid,
       })
     );
     setTask("");
