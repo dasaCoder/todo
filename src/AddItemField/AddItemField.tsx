@@ -21,7 +21,6 @@ const AddItemField = () => {
     }
     dispatch(
       addTodo({
-        id: `${Math.random()}`,
         task,
         isDone: false,
         date: new Date().toISOString(),

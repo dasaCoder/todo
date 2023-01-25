@@ -22,7 +22,6 @@ function App() {
   return (
     <Grid container className="App">
       <AddItemField />
-      <h1>{user?.email} email</h1>
       <Grid container className="todo-container" justifyContent="center">
         <List style={{ width: "inherit" }}>
           {todoList.map((todoItem) => (

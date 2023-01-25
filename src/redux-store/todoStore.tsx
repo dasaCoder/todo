@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import todoReducer from "./slices/todoSlice";
 import authReducer from "./slices/authSlice";
 
@@ -7,6 +7,10 @@ export const todoStore = configureStore({
     todo: todoReducer,
     auth: authReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof todoStore.getState>;

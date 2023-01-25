@@ -45,7 +45,7 @@ const TodoListItem = (props: { todoItem: TodoItem }) => {
           <IconButton
             edge="end"
             aria-label="comments"
-            onClick={() => handleDeleteItem(todoItem.id)}
+            onClick={() => handleDeleteItem(todoItem.id || "")}
           >
             <Delete fontSize="small" />
           </IconButton>

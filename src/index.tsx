@@ -17,7 +17,6 @@ root.render(
     <Provider store={todoStore}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
           <Route
             path="/"
             element={
@@ -26,6 +25,7 @@ root.render(
               </ProtectedRoute>
             }
           />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </Provider>
